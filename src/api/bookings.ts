@@ -23,17 +23,15 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
 }
 
 export async function getBookings(): Promise<Booking[]> {
-  // Шаг 2 · CLIENT-LIST: замените заглушку вызовом request для GET списка.
-  // START CLIENT-LIST
-  throw new Error('Шаг 2: подключите загрузку списка в src/api/bookings.ts.')
-  // END CLIENT-LIST
+  return request<Booking[]>('/api/bookings')
 }
 
 export async function createBooking(input: NewBooking): Promise<Booking> {
-  // Шаг 5 · CLIENT-CREATE: добавьте POST с JSON-телом и Content-Type.
-  // START CLIENT-CREATE
-  throw new Error('Шаг 5: подключите отправку формы в src/api/bookings.ts.')
-  // END CLIENT-CREATE
+  return request<Booking>('/api/bookings', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(input),
+})
 }
 
 // Шаг 10 · CLIENT-CONFIRM: уже готово. Сравните с POST, затем вызовите из main.ts.

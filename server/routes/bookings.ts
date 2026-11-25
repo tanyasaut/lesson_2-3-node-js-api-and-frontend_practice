@@ -10,16 +10,19 @@ export async function routeBookings(
 ) {
   if (pathname === '/api/bookings') {
     if (req.method === 'GET') {
-      // Шаг 1 · API-GET: замените заглушку получением списка и ответом 200.
-      // START API-GET
-      throw new HttpError(501, 'STEP_1', 'Шаг 1: подключите GET /api/bookings.')
-      // END API-GET
+      const bookings = await store.list()
+      sendJson(res, 200, { data: bookings })
+      return
     }
     if (req.method === 'POST') {
-      // Шаг 4 · API-POST: тело → проверка → серверные поля → запись → ответ 201.
-      // START API-POST
-      throw new HttpError(501, 'STEP_4', 'Шаг 4: подключите POST /api/bookings.')
-      // END API-POST
+      const input = validateNewBooking(await readJson(req))
+      const booking: Booking = {
+        id: randomUUID(), name: input.name, seats: input.seats,
+        status: 'new', source: 'web',
+      }
+      const created = await store.add(booking)
+      sendJson(res, 201, { data: created })
+      return
     }
     res.setHeader('Allow', 'GET, POST')
     throw new HttpError(405, 'METHOD', 'Для списка доступны GET и POST.')
