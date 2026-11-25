@@ -11,12 +11,13 @@ export function validateNewBooking(value: unknown): NewBooking {
   if (typeof body.name !== 'string' || body.name.trim() === '') {
     throw new HttpError(400, 'INVALID_NAME', 'Укажите непустое имя.')
   }
+  
   const seats = body.seats
-  // Шаг 3 · CHECK-SEATS: замените строку между метками проверкой числа от 1 до 5.
-  // Шаг 6 · LIMIT: позже временно измените верхнюю границу на 4 и верните 5.
-  // START CHECK-SEATS
-  throw new HttpError(501, 'STEP_3', 'Шаг 3: добавьте проверку числа участников.')
-  // END CHECK-SEATS
+  
+  if (typeof seats !== 'number' || !Number.isInteger(seats) || seats < 1 || seats > 5) {
+    throw new HttpError(400, 'INVALID_SEATS', 'Введите целое число участников от 1 до 5.')
+  }
+  return { name: body.name.trim(), seats }
 }
 
 // Готовая проверка PATCH: здесь разрешено только подтверждение.
