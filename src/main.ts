@@ -127,8 +127,9 @@ async function confirmFromCard(id: string) {
   try {
     // Шаг 10 · CONFIRM: вызовите готовый API-клиент, замените запись ответом сервера.
     // START CONFIRM
-    throw new Error('Шаг 10: подключите подтверждение в src/main.ts.')
-    // END CONFIRM
+  const updated = await confirmBooking(id)
+  bookings = bookings.map(row => row.id === id ? updated : row)
+   // END CONFIRM
     showMessage('Заявка подтверждена.')
   } catch (error) {
     showMessage(error instanceof Error ? error.message : 'Не удалось подтвердить заявку.', true)

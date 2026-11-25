@@ -12,5 +12,12 @@
     "seats": 1,
     "status": "new",
     "source": "web"
+  },
+  {
+    "id": "b9660ee7-18cd-4cdc-8d22-b6253716a727",
+    "name": "маша",
+    "seats": 3,
+    "status": "new",
+    "source": "web"
   }
 ]

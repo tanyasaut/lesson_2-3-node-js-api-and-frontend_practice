@@ -41,7 +41,7 @@ export async function routeBookings(
     if (updated === null) {
       // Шаг 9 · NOT-FOUND: замените учебный отказ на 404 с кодом NOT_FOUND.
       // START NOT-FOUND
-      throw new HttpError(501, 'STEP_9', 'Шаг 9: добавьте отказ для неизвестного id.')
+      throw new HttpError(404, 'NOT_FOUND', 'Заявка не найдена.')
       // END NOT-FOUND
     }
     sendJson(res, 200, { data: updated })
